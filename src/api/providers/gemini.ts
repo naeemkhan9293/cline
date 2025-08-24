@@ -242,6 +242,11 @@ export class GeminiHandler implements ApiHandler {
 					})
 					throw rateLimitError
 				}
+				if (apiError.includes("[403 Forbidden]")) {
+					throw new Error(
+						"Invalid Gemini API Key. Please check your API key in the settings and try again. If the issue persists, your key may be expired or invalid.",
+					)
+				}
 			} else {
 				apiError = String(error)
 			}
